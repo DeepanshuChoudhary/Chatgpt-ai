@@ -72,6 +72,7 @@ const Home = () => {
         withCredentials: true
       })
 
+      // if(messagePayload.chat !== activeChatId) return
       tempSocket.on("ai-response", (messagePayload) => {
         console.log("Received AI response: ", messagePayload);
 
