@@ -32,7 +32,7 @@ const Register = () => {
             navigate("/");
         }).catch((err) => {
             console.error(err);
-            alert('Registration failed (placeholder)');
+            alert('Registration failed');
         })
 
         try {
@@ -47,11 +47,14 @@ const Register = () => {
 
     return (
         <div className="center-min-h-screen">
+            
             <div className="auth-card" role="main" aria-labelledby="register-heading">
+            
                 <header className="auth-header">
                     <h1 id="register-heading">Create account</h1>
                     <p className="auth-sub">Join us and start exploring.</p>
                 </header>
+            
                 <form className="auth-form" onSubmit={handleSubmit} noValidate>
                     <div className="field-group">
                         <label htmlFor="email">Email</label>
@@ -75,8 +78,11 @@ const Register = () => {
                         {submitting ? 'Creating...' : 'Create Account'}
                     </button>
                 </form>
+            
                 <p className="auth-alt">Already have an account? <Link to="/login">Sign in</Link></p>
+            
             </div>
+        
         </div>
     );
 };

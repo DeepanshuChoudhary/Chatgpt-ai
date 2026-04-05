@@ -1,6 +1,3 @@
-/* === ChatGPT-like bottom composer === */
-/* Centered, max-width column, floating pill with subtle border */
-
 .composer {
     position: sticky; /* stays above scroll end */
     bottom: 0;

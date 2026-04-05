@@ -46,7 +46,7 @@ const initSocketServer = (httpServer) => {
         socket.on('ai-message', async (messagePayload) => {
             console.log('hello: ', messagePayload)
 
-            const [message, vectors] = await Promise.all([  // this execute both at same time
+            const [message, vectors] = await Promise.all([ 
                 messageModel.create({
                     chat: messagePayload.chat,
                     user: socket.user._id,

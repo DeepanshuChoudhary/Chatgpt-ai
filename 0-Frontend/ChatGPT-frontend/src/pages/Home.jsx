@@ -68,23 +68,23 @@ const Home = () => {
         dispatch(setChats(response.data.chats.reverse()));
       })
 
-      const tempSocket = io("https://chatgpt-ai-gs8w.onrender.com", {
-        withCredentials: true
-      })
+    const tempSocket = io("https://chatgpt-ai-gs8w.onrender.com", {
+      withCredentials: true
+    })
 
-      // if(messagePayload.chat !== activeChatId) return
-      tempSocket.on("ai-response", (messagePayload) => {
-        console.log("Received AI response: ", messagePayload);
+    // if(messagePayload.chat !== activeChatId) return
+    tempSocket.on("ai-response", (messagePayload) => {
+      console.log("Received AI response: ", messagePayload);
 
-        setMessages((prevMessage) => [...prevMessage, {
-          type: 'ai',
-          content: messagePayload.content
-        }])
+      setMessages((prevMessage) => [...prevMessage, {
+        type: 'ai',
+        content: messagePayload.content
+      }])
 
-        dispatch(sendingFinished());
-      })
-      
-      setSocket(tempSocket);
+      dispatch(sendingFinished());
+    })
+
+    setSocket(tempSocket);
 
     // const tempSocket = io("https://cohort-1-project-chat-gpt.onrender.com", {
     //   withCredentials: true,
@@ -139,7 +139,7 @@ const Home = () => {
 
   const getMessages = async (chatId) => {
 
-    const response = await axios.get(`https://chatgpt-ai-gs8w.onrender.com/api/chat/messages/${chatId}`, { withCredentials: true } )
+    const response = await axios.get(`https://chatgpt-ai-gs8w.onrender.com/api/chat/messages/${chatId}`, { withCredentials: true })
 
     console.log("Fetched messages: ", response.data.messages);
     setMessages(response.data.messages.map(m => ({
@@ -147,24 +147,17 @@ const Home = () => {
       content: m.content
     })));
 
-    // const response = await axios.get(`https://chatgpt-ai-gs8w.onrender.com/api/chat/messages/${chatId}`, { withCredentials: true })
-
-    // console.log("Fetched messages:", response.data.messages);
-
-    // setMessages(response.data.messages.map(m => ({
-    //   type: m.role === 'user' ? 'user' : 'ai',
-    //   content: m.content
-    // })));
-
   }
 
 
   return (
     <div className="chat-layout minimal">
+      
       <ChatMobileBar
         onToggleSidebar={() => setSidebarOpen(o => !o)}
         onNewChat={handleNewChat}
       />
+      
       <ChatSidebar
         chats={chats}
         activeChatId={activeChatId}
@@ -176,6 +169,7 @@ const Home = () => {
         onNewChat={handleNewChat}
         open={sidebarOpen}
       />
+      
       <main className="chat-main" role="main">
         {messages.length === 0 && (
           <div className="chat-welcome" aria-hidden="true">
@@ -184,6 +178,7 @@ const Home = () => {
             <p>Ask anything. Paste text, brainstorm ideas, or get quick explanations. Your chats stay in the sidebar so you can pick up where you left off.</p>
           </div>
         )}
+      
         <ChatMessages messages={messages} isSending={isSending} />
         {
           activeChatId &&
@@ -193,7 +188,9 @@ const Home = () => {
             onSend={sendMessage}
             isSending={isSending}
           />}
+      
       </main>
+      
       {sidebarOpen && (
         <button
           className="sidebar-backdrop"
@@ -201,6 +198,7 @@ const Home = () => {
           onClick={() => setSidebarOpen(false)}
         />
       )}
+    
     </div>
   );
 };
