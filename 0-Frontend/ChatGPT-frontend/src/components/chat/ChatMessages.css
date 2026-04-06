@@ -7,9 +7,10 @@
     flex-direction: column;
     gap: var(--space-5);
     max-width: 820px;
+    padding: 30px;
 }
 
-.messages::-webkit-scrollbar{
+.messages::-webkit-scrollbar {
     display: none;
 }
 
